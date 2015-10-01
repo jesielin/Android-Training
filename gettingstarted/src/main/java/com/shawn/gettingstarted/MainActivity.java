@@ -2,16 +2,20 @@ package com.shawn.gettingstarted;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.shawn.tools.DebugLog;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -20,6 +24,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        DebugLog.e("oncreate restore..");
+        if (savedInstanceState != null) {
+            DebugLog.e("data:" + savedInstanceState.get("DATA"));
+        }
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -57,5 +65,49 @@ public class MainActivity extends AppCompatActivity {
         String message = editMessage.getText().toString().trim();
         intent.putExtra("MESSAGE", message);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("DATA", "DATA");
+        DebugLog.e("save..");
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        DebugLog.e("restore..");
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        DebugLog.e("destroy..");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        DebugLog.e("onstart..");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        DebugLog.e("onstop...");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        DebugLog.e("onresume..");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        DebugLog.e("onpause..");
     }
 }

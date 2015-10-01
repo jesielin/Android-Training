@@ -1,1 +1,2 @@
-include ':app', ':gettingstarted'
+include ':app', ':gettingstarted', ':tools'
+include ':activitylifecycle'
